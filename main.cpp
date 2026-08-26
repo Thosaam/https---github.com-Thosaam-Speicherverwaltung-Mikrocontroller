@@ -4,7 +4,7 @@
 #include "Speicherblock.h"
 using namespace std;
 
-int main() {
+    int main() {
 /* 
 //Test für Sensor Klasse
 Sensor TemperaturSensor= Sensor ("Temperatur", "Celsius", 1, 20.0, 0.5); 
@@ -29,5 +29,5 @@ std::cout<< "Test Block 2 neue Länge setzen: " << std::endl;
 Block2.setLaenge(25);
 std::cout<< "Test Ausgabe von Block2: " << Block2.getBlockID() << " "<< Speicherblock::getNextBlockID() << " " << Block2.getStartIndex() << " " << Block2.getLaenge() << " "<< Block2.getBelegt() << std::endl;
 */
-    return 0;
+return 0;
 }
