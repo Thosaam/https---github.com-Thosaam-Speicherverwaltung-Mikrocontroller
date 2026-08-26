@@ -1,57 +1,33 @@
 #include <iostream>
 #include <string>
+#include "Sensor.h"
+#include "Speicherblock.h"
 using namespace std;
 
 int main() {
+/* 
+//Test für Sensor Klasse
+Sensor TemperaturSensor= Sensor ("Temperatur", "Celsius", 1, 20.0, 0.5); 
 
-    goto ende;
-char c;
-    while (cin >> c , c!=',') cout << c;
+std::cout<< "Test Ausgabe der Get Methoden: " << TemperaturSensor.getName() << " " << TemperaturSensor.getEinheit() << " " << TemperaturSensor.getAbtastrate() << " "<< TemperaturSensor.getMesswert() << " "<< TemperaturSensor.getMittelwert() << " " << TemperaturSensor.getRauschen() << std::endl;
 
-/*
-double zahl1, zahl2, zahl3,zahl4, zahl5, mittelwert;
-
-string name,vorname, Personalien;
-int Kennnummer;
-
-
-std::cout<<"Personalwesen, Bitte Name, Vorname und Kennummer angeben" <<std::endl;
-std::cin>> name>> vorname>> Kennnummer;
-Personalien= std::to_string(Kennnummer) + " "+ vorname + " "+name;
-std::cout<<"Personalien" << Personalien << std::endl;
-
-
-std::cout<<"Mittelwertberechnung: Bitte Zahl1 & zahl2 eingeben" <<std::endl;
-std::cin>> zahl1>> zahl2;
-std::cout<<"Bitte Zahl3 eingeben" <<std::endl;
-std::cin>> zahl3;
-std::cout<<"Bitte Zahl4 eingeben" <<std::endl;
-std::cin>> zahl4;
-std::cout<<"Bitte Zahl5 eingeben" <<std::endl;
-std::cin>> zahl5;
-
-mittelwert= (zahl1+zahl2+zahl3+zahl4+zahl5)/5;
-
-std::cout<<"Mittelwert der angegebenen Zahlen ist:" << mittelwert <<std::endl;
-
-
-
-
-    double a=11.1, b=5.784, c;
-    c= a+b;
-
-    std::cout << "Hello Lina" << std::endl;
-    std::cout <<std::right << "... viel Erfolg ..."<< '\n' << std::flush;
-    std::cout <<std::left << "... mit C++! Hier eine Rechnung:" << '\n' << std::flush
-    << a<< '+' << b<< '=' << c << std::endl;
-
-    int i = 10;
-for (i=0; i<4; i++)
-switch (i) {
-case 0: std::cout << 1;
-default: std::cout << i;
+std::cout << "Und hier einige Werte die der Sensor erzeugt: " << std::endl;
+for (int i = 0; i < 4; i++) {
+    TemperaturSensor.triggerMessung();
+    std::cout << "Messwert " << i + 1 << ": " << TemperaturSensor.getMesswert() << std::endl;
 }
+
+//Test für Speicherblock Klasse
+Speicherblock Block1= Speicherblock(0, 10);
+std::cout<< "Test Ausgabe der Get Methoden Block1: " << Block1.getBlockID() << " "<< Speicherblock::getNextBlockID() << " " << Block1.getStartIndex() << " " << Block1.getLaenge() << " "<< Block1.getBelegt() << std::endl;
+std::cout<< "Test Block1 neue Länge setzen: " << std::endl;
+Block1.setLaenge(15);
+std::cout<< "Test Ausgabe von Block1: " << Block1.getBlockID() << " "<< Speicherblock::getNextBlockID() << " " << Block1.getStartIndex() << " " << Block1.getLaenge() << " "<< Block1.getBelegt() << std::endl;
+Speicherblock Block2= Speicherblock(10, 20);
+std::cout<< "Test Ausgabe der Get Methoden Block2: " << Block2.getBlockID() << " "<< Speicherblock::getNextBlockID() << " " << Block2.getStartIndex() << " " << Block2.getLaenge() << " "<< Block2.getBelegt() << std::endl;
+std::cout<< "Test Block 2 neue Länge setzen: " << std::endl;
+Block2.setLaenge(25);
+std::cout<< "Test Ausgabe von Block2: " << Block2.getBlockID() << " "<< Speicherblock::getNextBlockID() << " " << Block2.getStartIndex() << " " << Block2.getLaenge() << " "<< Block2.getBelegt() << std::endl;
 */
-ende:
     return 0;
 }
