@@ -1,4 +1,6 @@
 #include "Speicherblock.h"
+#include <stdexcept>
+
 
 
 // Konstruktoraufruf 
@@ -7,9 +9,19 @@ Speicherblock::Speicherblock( int startIndex, int laenge)
     : blockID(++nextBlockID),
     startIndex(startIndex),
     laenge(laenge),
-    belegt(true) {}
+    belegt(true)
+{
+    if (startIndex < 0)
+    {
+        throw std::invalid_argument("startIndex darf nicht negativ sein.");
+    }
+    if (laenge <= 0)
+    {
+        throw std::invalid_argument("laenge muss positiv sein.");
+    }
+}
 
-// Getter-Methoden um die privaten Variablen abzufragen
+
 int Speicherblock::getBlockID()const {
     return blockID;
 }
@@ -26,18 +38,6 @@ int Speicherblock::getLaenge()const {
     return laenge;
 }
 
-bool Speicherblock::getBelegt()const {
+bool Speicherblock::istBelegt()const {
     return belegt;
-}
-
-// Methode um Speicherblock freizugeben bzw. zu belegen, d.h. belegt auf false/true zu setzen
-void Speicherblock::freigeben() {
-    belegt = false;
-}
-void Speicherblock::belegen() {
-    belegt = true;
-}
-// Methode um die Länge des Speicherblocks dynamisch anzupassen
-void Speicherblock::setLaenge(int neueLaenge) {
-        laenge = neueLaenge;
 }

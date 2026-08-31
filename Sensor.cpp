@@ -16,10 +16,26 @@ Sensor::Sensor(
     messwert(0.0), 
     mittelwert(mittelwert), 
     rauschen(rauschen),
+    letzteMessung{},
     // Generator wird mit einer zufälligen Startzahl initialisiert
-    Zufallszahlgenerator(std::random_device{}()) {}
+    zufallszahlgenerator(std::random_device{}()) 
+{
+    if (rauschen < 0.0)
+    {
+        throw std::invalid_argument(
+            "Rauschen darf nicht negativ sein."
+        );
+    }
 
-// Getter-Methoden um die privaten Variablen abzufragen
+    if (abtastrate <= 0)
+    {
+        throw std::invalid_argument(
+            "Abtastrate muss positiv sein."
+        );
+    }
+}
+
+
     std::string Sensor::getName()const {
         return name;
     }
@@ -45,14 +61,34 @@ Sensor::Sensor(
         return rauschen;
     }
 
-    // Methode zum Erzeugen eines zufälligen Messwerts
+    // steady_clock statt system_clock, da monoton steigend und unabhaengig
+    // wichtig fuer korrekte Intervallmessung in messungFaellig()
+    std::chrono::steady_clock::time_point Sensor::getLetzteMessung() const {
+        return letzteMessung;
+    }
+
+   void Sensor::setLetzteMessung(std::chrono::steady_clock::time_point zeitwert){
+        letzteMessung= zeitwert;
+    }
+
+    bool Sensor::messungFaellig() const
+    {
+    auto jetzt = std::chrono::steady_clock::now();
+
+    auto vergangeneZeit =
+        std::chrono::duration_cast<std::chrono::milliseconds>(
+            jetzt - letzteMessung
+        ).count();
+
+    return vergangeneZeit >= abtastrate;
+    }
+
     double Sensor::messwertErzeugen() {
         // Gleichverteilte Abweichung innerhalb des definierten Rauschbereichs
         std::uniform_real_distribution<double> verteilung(-rauschen, rauschen);
-        return mittelwert + verteilung(Zufallszahlgenerator);
+        return mittelwert + verteilung(zufallszahlgenerator);
     }
 
-    // Methode zum Auslösen einer Messung, die den Messwert später anhand der Abtastrate aktualisiert
      void Sensor::triggerMessung(){
         messwert = messwertErzeugen();
      }
