@@ -263,7 +263,7 @@ int main()
     Sensor Sensor1(
         "Temperatur",
         "Grad Celsius",
-        3000,
+        9000,
         23,
         0.5
     );
@@ -284,7 +284,7 @@ int main()
     Sensor Sensor2(
         "Luftfeuchtigkeit",
         "% relative Feuchte",
-        7000,
+        3000,
         55.0,
         3.0
     );
